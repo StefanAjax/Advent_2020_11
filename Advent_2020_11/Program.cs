@@ -10,6 +10,7 @@ namespace Advent_2020_11
 
             int count = 0;
             int oldCount = 0;
+
             while (true)
             {
                 seatMap = GetNextSeatmapPart1(seatMap);
@@ -25,14 +26,12 @@ namespace Advent_2020_11
             oldCount = 0;
             while (true)
             {
-                //PrintSeatmap(seatMap);
                 seatMap = GetNextSeatmapPart2(seatMap);
                 oldCount = count;
                 
                 count = CountOccupiedSeats(seatMap);
                 if (oldCount == count)
                 {
-                    PrintSeatmap(seatMap);
                     break;
                 }
             }
@@ -86,7 +85,6 @@ namespace Advent_2020_11
                                 result[point] = 'L';
                                 break;
                             }
-
                         }
                     }
                 }
@@ -130,11 +128,8 @@ namespace Advent_2020_11
             };
             foreach (var point in input.Keys)
             {
-                //Console.WriteLine($"Doing point {point.X},{point.Y} with value {input[point]}");
-
                 if (input[point] == '.') {
                     result.Add(point, '.'); //Floor never changes
-                    //Console.WriteLine("Floor never changes");
                 } 
 
                 else if (input[point] == 'L') // If a seat is empty (L) and there are no occupied seats adjacent to it, the seat becomes occupied.
@@ -145,7 +140,6 @@ namespace Advent_2020_11
                         var visiblePoint = Add(point, direction); ;
                         while (input.TryGetValue(visiblePoint, out char visibleChar) && visibleChar == '.'){ 
                             visiblePoint = Add(visiblePoint, direction);
-                            //Console.WriteLine($"Moved to {visiblePoint.X}, {visiblePoint.Y}");
                         }
                             
                         // Here the visible point is either a seat or outside of bounds
@@ -172,7 +166,6 @@ namespace Advent_2020_11
                         while (input.TryGetValue(visiblePoint, out char visibleChar) && visibleChar == '.')
                         {
                             visiblePoint = Add(visiblePoint, direction);
-                            //Console.WriteLine($"Moved to {visiblePoint.X}, {visiblePoint.Y}");
                         }
                             
                         // Here the visible point is either a seat or outside of bounds
@@ -182,7 +175,6 @@ namespace Advent_2020_11
                             if (adjacentSeat == '#')
                             {
                                 countOccupiedAdjacentSeats++;
-                                //Console.WriteLine(countOccupiedAdjacentSeats);
                                 if (countOccupiedAdjacentSeats >= 5)
                                 {
                                     result[point] = 'L';
